@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>How Long Can I Live?</title>
+<style>
+    html {
+    scroll-behavior: smooth;
+    }
+    
+    body{
+    font-family: fantasy;
+    font-size: 20px;
+    }
+    * {box-sizing: border-box;}
+
+    .head {
+    height: 420px;
+    }
+
+    h1 {
+    width: 500px;
+    margin:auto;
+    margin-top:30px;
+    margin-bottom:30px;
+    }
+    
+    img {
+    float: left;
+    max-width: 50%;
+    max-height: 330px;
+    padding: 0% 100px 0% 100px;
+    }
+    
+    span {
+    font-family: Georgia;
+    font-size: 105%;
+    max-width: 50%;
+    float: right;
+    text-align: center;
+    padding: 10% 100px 10% 100px;
+    }
+
+    input[type=text], select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-top: 6px;
+      margin-bottom: 16px;
+      resize: vertical;
+    }
+
+    input[type=submit] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    input[type=submit]:hover {
+      background-color: #45a049;
+    }
+
+    .container {
+      border-radius: 5px;
+      background-color: #f2f2f2;
+      padding: 20px;
+      text-transform: uppercase;
+    }
+
+    #result{
+        background: white;
+        border-left: solid #00a2df 30px;
+        font-size: 200%;
+        width:800px;
+        text-align: center;
+        padding: 50px 10px 50px 10px;
+        position: relative;
+        animation-name: slide;
+        animation-duration: 2.5s;
+        animation-delay: 2s;
+        animation-fill-mode: both;
+        display: none;
+    }
+    
+    #pred{
+        display: inline;
+        position: relative;
+        animation-name: fade;
+        animation-delay:5s;
+    }
+
+    #error{
+        background: #ffb2ae;
+        border-left: solid #ff5148 10px;
+        width: 100%;
+        padding: 10px 10px 10px 10px;
+        display: none;
+    }
+    
+    @keyframes slide {
+        from{left: 0px; background-color: #0660bd; color:white;}
+        to{left:210px; background-color: #e6f3fa;}
+    }
+    
+    @keyframes fade {
+        0% {opacity:0;}
+        100% {opacity:1;}
+    }
+
+</style>
+</head>
+<body>
+
+<div class="head">
+    <h1>Life Expectancy Prediction</h1>
+     <img src="https://news.cgtn.com/news/3d3d514d7955444f/img/d4b069c1-3b18-4e7b-98f4-c9d30f3f22dd.jpg">
+    <span>An average person now lives to 73.<br><br>Find out how long you'll live based on your country's economic demographic statistics.</span>
+</div>
+    
+<p id="error"> Invalid input(s). Please check and try again.</p>
+    
+<div class="container">
+  <form action="/predict"method="post">
+    <label for="fname">Income Composition of Resources</label>
+    <input type="text" name="income_composition_of_resources" placeholder="SG:0.938; MY:0.810; US:0.926" required>
+
+    <label>Adult Mortality Rate</label>
+    <input type="text" name="adult_mortality_rates" placeholder="SG:1.828; MY:2.993; US:1.788" required>
+    
+    <label>HIV/AIDS Deaths per 1000 population</label>
+    <input type="text" name="HIV/AIDS_Deaths" placeholder="SG:0; MY:0; US:0" required>
+    
+    <label>Number of years of schooling</label>
+    <input type="text" name="schooling" placeholder="SG:11.6; MY:10.4; US:13.4" required>
+    
+    <label>Average Body Mass Index of population</label>
+    <input type="text" name="bmi" placeholder="SG:23.15; MY:62.65; US:26.5" required>
+      
+    <label>Country Status</label>
+    <input type="text" name="status" placeholder="DEVELOPING:0; DEVELOPED:1" required>
+    
+    <label>Prevalance of Thinness among 1-19 yrs of age</label>
+    <input type="text" name="thinness" placeholder="SG:0; MY:20.7; US:3.5" required>
+    
+            <label>Immunization Coverage</label>
+    <input type="text" name="immunization_coverage" placeholder="LOW:1; HIGH:0" required>
+    
+            <label>Current Health Expenditure (% of GDP)</label>
+    <input type="text" name="health_exp" placeholder="SG:4.4; MY:3.9; US:17.1" required>
+    
+            <label>Alcohol Consumption per capita</label>
+    <input type="text" name="alcohol" placeholder="SG:2; MY:0.9; US:2.35" required>
+    
+            <label>Number of Infant Deaths per 1000 live births</label>
+    <input type="text" name="infant_deaths" placeholder="SG:2.3; MY:6.7; US:5.6" required>
+    
+            <label>Government Health Expenditure (% of Total)</label>
+    <input type="text" name="gov_health_exp" placeholder="SG:48.2; MY:51.86; US:84.78" required>
+    
+            <label>Year of Birth</label>
+    <input type="text" name="year" placeholder="Eg.2000" required>
+    
+    <label>Number of Measles cases per 1000 population</label>
+    <input type="text" name="measles" placeholder="SG:0.024; MY:0.029; US:0.003" required>
+
+    <input type="submit" value="VIEW RESULT !">
+
+  </form>
+</div>
+
+<p id="result">{{life_expectancy_pred}}</p>
+
+</body>
+    
+    <script>
+        document.getElementById('{{ show }}').style.display = 'block';
+        document.getElementById('{{ scroll }}').scrollIntoView();
+    </script>
+    
+</html>
